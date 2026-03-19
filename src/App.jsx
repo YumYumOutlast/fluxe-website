@@ -29,18 +29,10 @@ export default function App() {
     if (el) el.dataset.id = id;
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!email) return;
-    try {
-      await fetch(`https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, reactivate_existing: true, send_welcome_email: true }),
-      });
-    } catch (err) {
-      console.error("Beehiiv error:", err);
-    }
+    window.open(`https://getfluxe.beehiiv.com/subscribe?email=${encodeURIComponent(email)}`, "_blank");
     setSubmitted(true);
   };
 
