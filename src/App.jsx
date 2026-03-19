@@ -107,20 +107,7 @@ export default function App() {
         <div style={{ ...styles.container, textAlign: "center" }}>
           <h2 style={styles.h2}>Get the free checklist first</h2>
           <p style={styles.sectionSub}>The First Step Checklist — the exact 5 things to do before you build anything. Free. Instant. No fluff.</p>
-          {!submitted ? (
-            <form onSubmit={handleSubmit} style={styles.emailForm}>
-              <input type="email" placeholder="your@email.com" value={email} onChange={(e) => setEmail(e.target.value)} required style={styles.emailInput} />
-              <button type="submit" style={styles.btnPrimary}>Send it to me →</button>
-            </form>
-          ) : (
-            <div style={styles.thankYou}>
-              <span style={styles.checkmark}>✓</span>
-              <p style={styles.thankYouText}>
-                You're in. Check your inbox.<br />
-                <a href={GUMROAD_URL} target="_blank" rel="noreferrer" style={styles.upsellLink}>Ready for the full blueprint? Get it here →</a>
-              </p>
-            </div>
-          )}
+          <div style={{ marginTop: "2rem" }} dangerouslySetInnerHTML={{ __html: `<script async src="https://subscribe-forms.beehiiv.com/embed.js"></script><iframe src="https://subscribe-forms.beehiiv.com/c362bd35-1548-4a0c-9ca0-b483426f7be3" class="beehiiv-embed" frameborder="0" scrolling="no" style="width:100%;max-width:560px;height:207px;margin:0 auto;display:block;background-color:transparent;"></iframe>` }} />
         </div>
       </section>
       <section ref={ref("pricing")} style={styles.section} className={visible["pricing"] ? "reveal" : "pre-reveal"}>
