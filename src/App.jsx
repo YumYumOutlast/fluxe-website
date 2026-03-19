@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 
 const GUMROAD_URL = "https://getfluxe.gumroad.com/l/ezstu";
+const BEEHIIV_PUB_ID = "pub_4e440ce5-0b46-463f-87b0-548e55c4df19";
 
 export default function App() {
   const [email, setEmail] = useState("");
@@ -28,9 +29,19 @@ export default function App() {
     if (el) el.dataset.id = id;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (email) setSubmitted(true);
+    if (!email) return;
+    try {
+      await fetch(`https://api.beehiiv.com/v2/publications/${BEEHIIV_PUB_ID}/subscriptions`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, reactivate_existing: true, send_welcome_email: true }),
+      });
+    } catch (err) {
+      console.error("Beehiiv error:", err);
+    }
+    setSubmitted(true);
   };
 
   const steps = [
